@@ -10,17 +10,8 @@ export const Products = () => {
     useEffect(
         () => {
             const fetchData = async () => {
-                const response = await fetch('http://localhost:8088/products')
+                const response = await fetch('http://localhost:8088/products?_expand=productTypes&_sort=name&_order=asc')
                 const productsArray = await response.json()
-                productsArray.sort(( a, b ) => {
-                    if ( a.name < b.name ){
-                      return -1;
-                    }
-                    if ( a.name > b.name ){
-                      return 1;
-                    }
-                    return 0;
-                  })
                 setProducts(productsArray)
             }
             fetchData()
@@ -58,7 +49,7 @@ export const Products = () => {
                 filteredProducts.map(
                     (product) => {
                         return <section key={product.id} className="product">
-                            <p>{product.name}: ${product.price.toFixed(2)}</p>
+                            <p>{product.name}: ${product.price.toFixed(2)} ({product.productTypes.type})</p>
                         </section>
                     }
                 )

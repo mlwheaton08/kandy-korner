@@ -1,5 +1,6 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { Stores } from "../stores/Stores.js"
+import { Products } from "../products/Products.js"
 
 export const ApplicationViews = () => {
 	return (
@@ -14,6 +15,7 @@ export const ApplicationViews = () => {
             }>
 
 			<Route path="stores" element={ <Stores /> } />
+			<Route path="products" element={ <Products /> } />
 
                 
             </Route>

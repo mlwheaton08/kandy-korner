@@ -1,0 +1,25 @@
+.customers {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.customer {
+    background-color: rgb(192, 255, 241);
+    border: 2px solid rgb(48, 34, 178);
+    color: black;
+    padding: 0.2rem;
+    margin: 0.2rem;
+}
+
+.customer_header {
+    margin: 1rem 0 0.25rem 0;
+    font-style: oblique;
+}
+
+.customer_footer {
+    font-size: larger;
+    font-weight: 700;
+    line-height: 3rem;
+}

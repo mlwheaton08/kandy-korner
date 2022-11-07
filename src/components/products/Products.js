@@ -34,7 +34,7 @@ export const Products = ({searchTermState}) => {
     useEffect(
         () => {
             if (topPriced) {
-            const topPricedProductsArray = products.filter(product => {return product.price > 2})
+            const topPricedProductsArray = products.filter(product => product.price > 2)
             setFilteredProducts(topPricedProductsArray)
             } else {
             setFilteredProducts(products)
@@ -59,12 +59,12 @@ export const Products = ({searchTermState}) => {
 
         {
             // IF USER IS STAFF -----------------
-            kandyUserObject.isStaff
+            kandyUserObject.staff
             ? <>
                 <h1>List of Products</h1>
                 <button onClick={() => navigate("/product/create")}>Add Product</button>
-                <button onClick={ () => {setTopPriced(true)}}>Top Priced</button>
-                <button onClick={ () => {setTopPriced(false)}}>Show All</button>
+                <button onClick={() => {setTopPriced(true)}}>Top Priced</button>
+                <button onClick={() => {setTopPriced(false)}}>Show All</button>
                 <article className="products">
                     {
                         filteredProducts.map(

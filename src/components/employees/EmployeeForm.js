@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom"
 export const EmployeeForm = () => {
     const navigate = useNavigate()
 
-    const localKandyUser = localStorage.getItem("kandy_user")
-    const kandyUserObject = JSON.parse(localKandyUser)
-
     const [employee, update] = useState({
         name: "",
         email: "",

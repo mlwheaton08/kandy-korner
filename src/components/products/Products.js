@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Product } from "./Product"
 
 
 export const Products = ({searchTermState}) => {
@@ -12,16 +13,24 @@ export const Products = ({searchTermState}) => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
     const [topPriced, setTopPriced] = useState(false)
+    const [customers, setCustomers] = useState([])
 
     useEffect(
         () => {
-            const fetchData = async () => {
+            const fetchProducts = async () => {
                 const response = await fetch('http://localhost:8088/products?_expand=productTypes&_sort=name&_order=asc')
                 const productsArray = await response.json()
                 setProducts(productsArray)
+                console.log(productsArray)
             }
-            fetchData()
-            console.log('Initial state of products', products)
+            fetchProducts()
+
+            const fetchCustomers = async () => {
+				const response = await fetch(`http://localhost:8088/customers?_expand=user`)
+				const customerArray = await response.json()
+				setCustomers(customerArray)
+			}
+			fetchCustomers()
         },
         []
     )
@@ -54,9 +63,6 @@ export const Products = ({searchTermState}) => {
     )
 
     return <>
-
-
-
         {
             // IF USER IS STAFF -----------------
             kandyUserObject.staff
@@ -80,15 +86,12 @@ export const Products = ({searchTermState}) => {
             // IF USER IS CUSTOMER ----------------
             : <article className="products">
                     {
-                        searchTermState !== ""
-                        ? filteredProducts.map(
-                            (product) => {
-                                return <section key={product.id} className="product">
-                                    <p>{product.name}: ${product.price.toFixed(2)}</p>
-                                </section>
-                            }
+                        filteredProducts.map(
+                            (product) => <Product
+                                customers={customers}
+                                currentUser={kandyUserObject}
+                                productObject={product} />
                         )
-                        : ""
                     }
             </article>
         }
